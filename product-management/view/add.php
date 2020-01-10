@@ -1,3 +1,8 @@
+
+<div class="alert alert-warning" role="alert">
+    <?php if ($message != true) echo $message; ?>
+</div>
+
 <form method="post">
     <div class="form-group">
         <label for="">Name </label>

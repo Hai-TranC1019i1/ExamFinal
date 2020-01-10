@@ -1,6 +1,7 @@
 <?php
 
 namespace Project\model;
+
 use Project\model\DB;
 use Project\model\Product;
 use Project\model\ProductDB;
@@ -26,22 +27,33 @@ class ProductController
         include "view/list.php";
     }
 
+    public function checkValidate()
+    {
+        if (empty($_POST["name"]) && empty($_POST["price"]) && empty($_POST["amount"])) {
+            return "Name, price and amount is required!";
+        } else {
+            return true;
+        }
+    }
+
     public function add()
     {
         include "view/add.php";
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $product = new Product();
-            $product->setName($_POST["name"]);
-            $product->setType($_POST["type"]);
-            $product->setPrice($_POST["price"]);
-            $product->setAmount($_POST["amount"]);
-            $product->setDescription($_POST["description"]);
-            $product->setCreatedDate($_POST["createdDate"]);
+          //  if ($message = $this->checkValidate()) {
+                $product = new Product();
+                $product->setName($_POST["name"]);
+                $product->setType($_POST["type"]);
+                $product->setPrice($_POST["price"]);
+                $product->setAmount($_POST["amount"]);
+                $product->setDescription($_POST["description"]);
+                $product->setCreatedDate($_POST["createdDate"]);
 
-            $this->productDB->add($product);
-            header("location: index.php");
+                header("location: index.php");
+
         }
     }
+
 
     public function edit()
     {
